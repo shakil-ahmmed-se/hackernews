@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="top-stories">
-    <h1>Top 10 New HackerNews <span style={{color:'blue'}}>Stories</span></h1>
+    <h1>Top 10 New HackerNews <span style={{color:'#ff5200'}}>Stories</span></h1>
     <ul>
       {stories.map((story, index) => (
         <li key={index} className="story">

@@ -1,23 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [stories, setStories] = useState([]);
+  console.log(stories)
+
+  useEffect(()=>{
+    fetch('https://hacker-news-ykvv.onrender.com/api/top-stories')
+   .then(res => res.json())
+   .then(data => setStories(data))
+   .catch(err => console.error(err))
+
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Top 10 New HackerNews Stories</h1>
+      <ul>
+        {stories.map((story, index) => (
+          <li key={index}>
+            <a href={story.url} target="_blank" rel="noopener noreferrer">
+              {story.title}
+            </a>
+            <p>By: {story.author}</p>
+            <p>Score: {story.score}</p>
+            <p>Posted: {story.time}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
